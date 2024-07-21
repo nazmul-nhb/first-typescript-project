@@ -46,3 +46,6 @@ const userDetails = (
 const sayHello = (user: userType) => {
     console.log(`Hello! ${user.age > 50 ? 'Sir' : 'Mr.'} ${user.name}`);
 }
+
+userDetails(12,{name:'Enemy', age:52});
+sayHello({ name: 'Enemy', age: 52 });
