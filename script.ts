@@ -33,3 +33,16 @@
 
 // player.skills();
 
+type idType = string | number;
+type userType = { name: string, age: number };
+
+const userDetails = (
+    id: idType,
+    user: userType
+) => {
+    console.log(`User ID is ${id}, Name is ${user.name}, age is ${user.age}`);
+}
+
+const sayHello = (user: userType) => {
+    console.log(`Hello! ${user.age > 50 ? 'Sir' : 'Mr.'} ${user.name}`);
+}
