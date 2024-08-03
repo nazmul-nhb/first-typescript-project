@@ -34,18 +34,44 @@
 // player.skills();
 
 type idType = string | number;
-type userType = { name: string, age: number };
+type userType = { name: string; age: number };
 
-const userDetails = (
-    id: idType,
-    user: userType
-) => {
-    console.log(`User ID is ${id}, Name is ${user.name}, age is ${user.age}`);
-}
+const userDetails = (id: idType, user: userType) => {
+	console.log(`User ID is ${id}, Name is ${user.name}, age is ${user.age}`);
+};
 
 const sayHello = (user: userType) => {
-    console.log(`Hello! ${user.age > 50 ? 'Sir' : 'Mr.'} ${user.name}`);
+	console.log(`Hello! ${user.age > 50 ? "Sir" : "Mr."} ${user.name}`);
+};
+
+userDetails(12, { name: "Enemy", age: 52 });
+sayHello({ name: "Enemy", age: 52 });
+
+// enums
+const enum Size {
+	Small = 12,
+	Medium = 16,
+	Large = 20,
 }
 
-userDetails(12,{name:'Enemy', age:52});
-sayHello({ name: 'Enemy', age: 52 });
+const mySize: Size = Size.Medium;
+
+console.log(mySize);
+
+const calculateAge = (birthday: string): string => {
+	const birthDate = new Date(birthday);
+	const today: Date = new Date();
+
+	const year: number = today.getFullYear() - birthDate.getFullYear();
+	const month: number = today.getMonth() - birthDate.getMonth();
+
+	const day: number = Math.abs(today.getDate() - birthDate.getDate());
+
+	const age: string = `${year} ${year > 1 ? "years" : "year"} ${month} ${
+		month > 1 ? "months" : "month"
+	} ${day} ${day > 1 ? "days" : "day"}`;
+
+	return age;
+};
+
+console.log(calculateAge("1992-01-18"));
