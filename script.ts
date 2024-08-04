@@ -59,14 +59,14 @@ const mySize: Size = Size.Medium;
 console.log(mySize);
 
 const calculateAge = (birthday: string): string => {
-	const birthDate = new Date(birthday);
+	const birthDate: Date = new Date(birthday);
 	const today: Date = new Date();
 
 	const year: number = today.getFullYear() - birthDate.getFullYear();
 	if (year < 0) return "Birth Year Cannot be a Future Year!";
 
 	const month: number = today.getMonth() - birthDate.getMonth();
-	
+
 	const day: number = Math.abs(today.getDate() - birthDate.getDate());
 
 	const age: string = `${year} ${year > 1 ? "years" : "year"} ${month} ${
