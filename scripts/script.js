@@ -18,9 +18,9 @@ const calculateAge = (birthday) => {
     const year = today.getFullYear() - birthDate.getFullYear();
     if (year < 0)
         return "Birth Year Cannot be a Future Year!";
-    const month = today.getMonth() - birthDate.getMonth();
+    const month = Math.abs(today.getMonth() - birthDate.getMonth());
     const day = Math.abs(today.getDate() - birthDate.getDate());
     const age = `${year} ${year > 1 ? "years" : "year"} ${month} ${month > 1 ? "months" : "month"} ${day} ${day > 1 ? "days" : "day"}`;
     return age;
 };
-console.log(calculateAge("2092-01-18"));
+console.log(calculateAge("2024-08-05"));
