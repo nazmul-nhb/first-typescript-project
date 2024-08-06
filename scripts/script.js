@@ -15,12 +15,25 @@ console.log(mySize);
 const calculateAge = (birthday) => {
     const birthDate = new Date(birthday);
     const today = new Date();
-    const year = today.getFullYear() - birthDate.getFullYear();
-    if (year < 0)
-        return "Birth Year Cannot be a Future Year!";
-    const month = Math.abs(today.getMonth() - birthDate.getMonth());
-    const day = Math.abs(today.getDate() - birthDate.getDate());
+    // Check if the birth date is in the future
+    if (today < birthDate)
+        return "Birth date cannot be in the future!";
+    let year = today.getFullYear() - birthDate.getFullYear();
+    let month = today.getMonth() - birthDate.getMonth();
+    let day = today.getDate() - birthDate.getDate();
+    // Adjust for cases where the current month is earlier in the year than the birth month
+    if (month < 0) {
+        year--;
+        month += 12;
+    }
+    // Adjust for cases where the current day is earlier in the month than the birth day
+    if (day < 0) {
+        month--;
+        const previousMonth = today.getMonth() === 0 ? 11 : today.getMonth() - 1;
+        const daysInPreviousMonth = new Date(today.getFullYear(), previousMonth + 1, 0).getDate();
+        day += daysInPreviousMonth;
+    }
     const age = `${year} ${year > 1 ? "years" : "year"} ${month} ${month > 1 ? "months" : "month"} ${day} ${day > 1 ? "days" : "day"}`;
     return age;
 };
-console.log(calculateAge("2024-08-05"));
+console.log(calculateAge("1995-05-03"));

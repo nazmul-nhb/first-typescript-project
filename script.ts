@@ -62,12 +62,31 @@ const calculateAge = (birthday: string): string => {
 	const birthDate: Date = new Date(birthday);
 	const today: Date = new Date();
 
-	const year: number = today.getFullYear() - birthDate.getFullYear();
-	if (year < 0) return "Birth Year Cannot be a Future Year!";
+	// Check if the birth date is in the future
+	if (today < birthDate) return "Birth date cannot be in the future!";
 
-	const month: number = Math.abs(today.getMonth() - birthDate.getMonth());
+	let year: number = today.getFullYear() - birthDate.getFullYear();
+	let month: number = today.getMonth() - birthDate.getMonth();
+	let day: number = today.getDate() - birthDate.getDate();
 
-	const day: number = Math.abs(today.getDate() - birthDate.getDate());
+	// Adjust for cases where the current month is earlier in the year than the birth month
+	if (month < 0) {
+		year--;
+		month += 12;
+	}
+
+	// Adjust for cases where the current day is earlier in the month than the birth day
+	if (day < 0) {
+		month--;
+		const previousMonth =
+			today.getMonth() === 0 ? 11 : today.getMonth() - 1;
+		const daysInPreviousMonth = new Date(
+			today.getFullYear(),
+			previousMonth + 1,
+			0
+		).getDate();
+		day += daysInPreviousMonth;
+	}
 
 	const age: string = `${year} ${year > 1 ? "years" : "year"} ${month} ${
 		month > 1 ? "months" : "month"
@@ -76,4 +95,5 @@ const calculateAge = (birthday: string): string => {
 	return age;
 };
 
-console.log(calculateAge("2024-08-05"));
+console.log(calculateAge("1995-05-03"));
+
